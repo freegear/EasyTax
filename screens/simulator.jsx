@@ -2,6 +2,8 @@
 // Sliders for IRP/연금저축/ISA, live tax savings recalc visual
 
 function ScreenSimulator() {
+  const { go } = React.useContext(window.NavCtx);
+
   // Visual-only state (interactive but not connected to real calculation engine)
   const [irp, setIrp] = React.useState(700);     // 만원
   const [pension, setPension] = React.useState(600);
@@ -60,7 +62,7 @@ function ScreenSimulator() {
   return (
     <Phone>
       <div className="et-screen" style={{ background: 'var(--et-bg)' }}>
-        <AppBar title="절세 시뮬레이터" onBack={() => {}} right={
+        <AppBar title="절세 시뮬레이터" onBack={() => go('home')} right={
           <div className="et-appbar-icon" style={{ fontSize: 13, fontWeight: 700, color: 'var(--et-primary)', width: 'auto', padding: '0 4px' }}>
             초기화
           </div>
