@@ -1,2 +1,20 @@
+# 런타임 파일
 .easytax.pid
 easytax.log
+logs/
+
+# 가상환경
+.venv/
+
+# 데이터베이스
+*.db
+*.db-shm
+*.db-wal
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# macOS
+.DS_Store
