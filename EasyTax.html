@@ -1,99 +1,117 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>EasyTax · 고연봉 직장인 절세 진단</title>
-<link rel="stylesheet" href="styles.css" />
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>EasyTax — 절세 포트폴리오 플랫폼</title>
+<link rel="stylesheet" href="design-system.css"/>
+<style>
+  html, body { margin: 0; padding: 0; height: 100%; background: #f0eee9; }
+  body { font-family: 'Pretendard', -apple-system, system-ui, sans-serif; }
+  #root { height: 100vh; }
+  /* Phone shadow inside artboards */
+  .et-phone {
+    border-radius: 38px;
+    box-shadow: 0 24px 60px rgba(15,23,42,0.10), 0 4px 14px rgba(15,23,42,0.06);
+    border: 1px solid rgba(15,23,42,0.06);
+    overflow: hidden;
+  }
+</style>
+</head>
+<body>
+<div id="root"></div>
+
 <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
-</head>
-<body>
 
-<div id="root"></div>
-
+<script type="text/babel" src="design-canvas.jsx"></script>
 <script type="text/babel" src="tweaks-panel.jsx"></script>
-<script type="text/babel" src="chrome.jsx"></script>
-<script type="text/babel" src="screen-input.jsx"></script>
-<script type="text/babel" src="screen-analyze.jsx"></script>
-<script type="text/babel" src="screen-result.jsx"></script>
-<script type="text/babel" src="screen-action.jsx"></script>
+<script type="text/babel" src="ui-shell.jsx"></script>
+<script type="text/babel" src="screens/onboarding.jsx"></script>
+<script type="text/babel" src="screens/input.jsx"></script>
+<script type="text/babel" src="screens/home.jsx"></script>
+<script type="text/babel" src="screens/simulator.jsx"></script>
+<script type="text/babel" src="screens/report.jsx"></script>
 
 <script type="text/babel">
 const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
-  "accentTheme": "toss-blue"
+  "primaryColor": "#2563eb",
+  "primaryStrong": "#1d4ed8",
+  "primarySoft": "#dbeafe",
+  "theme": "blue"
 }/*EDITMODE-END*/;
 
-const ACCENT_THEMES = {
-  'toss-blue':   { accent: '#3182F6', soft: '#E8F2FE', strong: '#1B64DA', label: 'Toss Blue' },
-  'kakao-yellow':{ accent: '#FAB300', soft: '#FFF6DC', strong: '#C18A00', label: 'Kakao Yellow' },
-  'naver-green': { accent: '#03C75A', soft: '#E1F8EC', strong: '#02A048', label: 'Naver Green' },
-  'coral':       { accent: '#FF6B5B', soft: '#FFEBE7', strong: '#D94532', label: 'Coral' },
-  'violet':      { accent: '#7C5CFF', soft: '#EFEAFF', strong: '#5B3CDB', label: 'Violet' },
-  'midnight':    { accent: '#1B1F28', soft: '#EEF0F3', strong: '#000', label: 'Midnight' },
+const THEMES = {
+  blue:    { primary: "#2563eb", strong: "#1d4ed8", soft: "#dbeafe", tint: "#eff6ff" },
+  emerald: { primary: "#059669", strong: "#047857", soft: "#d1fae5", tint: "#ecfdf5" },
+  violet:  { primary: "#7c3aed", strong: "#6d28d9", soft: "#ede9fe", tint: "#f5f3ff" },
+  slate:   { primary: "#0f172a", strong: "#020617", soft: "#e2e8f0", tint: "#f1f5f9" },
 };
-
-function applyAccent(theme) {
-  const t = ACCENT_THEMES[theme] || ACCENT_THEMES['toss-blue'];
-  document.documentElement.style.setProperty('--accent', t.accent);
-  document.documentElement.style.setProperty('--accent-soft', t.soft);
-  document.documentElement.style.setProperty('--accent-strong', t.strong);
-}
 
 function App() {
   const [tweaks, setTweak] = useTweaks(TWEAK_DEFAULTS);
-  const [step, setStep] = React.useState('input'); // input | analyze | result | action
 
-  React.useEffect(() => { applyAccent(tweaks.accentTheme); }, [tweaks.accentTheme]);
-
-  // Scroll to top on step change
-  React.useEffect(() => { window.scrollTo({ top: 0, behavior: 'instant' }); }, [step]);
+  // Apply theme
+  React.useEffect(() => {
+    const t = THEMES[tweaks.theme] || THEMES.blue;
+    document.documentElement.style.setProperty('--et-primary', t.primary);
+    document.documentElement.style.setProperty('--et-primary-strong', t.strong);
+    document.documentElement.style.setProperty('--et-primary-soft', t.soft);
+    document.documentElement.style.setProperty('--et-primary-tint', t.tint);
+  }, [tweaks.theme]);
 
   return (
     <>
-      <AppBar />
-      <Stepper current={step} onJump={setStep} />
+      <DesignCanvas>
+        <DCSection id="flow" title="EasyTax — 핵심 플로우" subtitle="고연봉 직장인용 절세 플랫폼 · 모바일 5개 화면">
+          <DCArtboard id="onboarding" label="01 · 온보딩" width={375} height={812}>
+            <ScreenOnboarding/>
+          </DCArtboard>
+          <DCArtboard id="input" label="02 · 정보 입력" width={375} height={812}>
+            <ScreenInputInfo/>
+          </DCArtboard>
+          <DCArtboard id="home" label="03 · 홈 / 대시보드" width={375} height={812}>
+            <ScreenHome/>
+          </DCArtboard>
+          <DCArtboard id="simulator" label="04 · 절세 시뮬레이터" width={375} height={812}>
+            <ScreenSimulator/>
+          </DCArtboard>
+          <DCArtboard id="report" label="05 · 포트폴리오 리포트" width={375} height={812}>
+            <ScreenReport/>
+          </DCArtboard>
+        </DCSection>
 
-      {step === 'input' && <ScreenInput onNext={() => setStep('analyze')} />}
-      {step === 'analyze' && <ScreenAnalyze onNext={() => setStep('result')} />}
-      {step === 'result' && <ScreenResult onNext={() => setStep('action')} />}
-      {step === 'action' && <ScreenAction onRestart={() => setStep('input')} />}
+        <DCSection id="variants" title="비주얼 스타일 변형" subtitle="온보딩 화면 — 라이트 / 딥블루">
+          <DCArtboard id="onb-a" label="A · 라이트 (기본)" width={375} height={812}>
+            <ScreenOnboarding variant="A"/>
+          </DCArtboard>
+          <DCArtboard id="onb-b" label="B · 딥블루 (프리미엄)" width={375} height={812}>
+            <ScreenOnboarding variant="B"/>
+          </DCArtboard>
+        </DCSection>
+      </DesignCanvas>
 
-      <TweaksPanel title="Tweaks">
-        <TweakSection title="컬러 테마">
-          <TweakSelect
-            label="Accent"
-            value={tweaks.accentTheme}
-            onChange={v => setTweak('accentTheme', v)}
-            options={Object.entries(ACCENT_THEMES).map(([k, t]) => ({ value: k, label: t.label }))}
+      <TweaksPanel title="EasyTax Tweaks">
+        <TweakSection title="테마">
+          <TweakRadio
+            label="메인 컬러"
+            value={tweaks.theme}
+            onChange={v => setTweak('theme', v)}
+            options={[
+              { value: 'blue', label: '블루' },
+              { value: 'emerald', label: '에메랄드' },
+              { value: 'violet', label: '바이올렛' },
+              { value: 'slate', label: '슬레이트' },
+            ]}
           />
-          <div style={{
-            display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 8, marginTop: 8,
-          }}>
-            {Object.entries(ACCENT_THEMES).map(([k, t]) => (
-              <button
-                key={k}
-                onClick={() => setTweak('accentTheme', k)}
-                style={{
-                  height: 36, borderRadius: 8,
-                  background: t.accent,
-                  border: tweaks.accentTheme === k ? '3px solid #111' : '3px solid transparent',
-                  cursor: 'pointer',
-                  outline: 'none',
-                }}
-                title={t.label}
-              />
-            ))}
-          </div>
         </TweakSection>
       </TweaksPanel>
     </>
   );
 }
 
-ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
 </script>
-
 </body>
 </html>

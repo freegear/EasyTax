@@ -1,0 +1,319 @@
+/* EasyTax Design System
+ * Trusted fintech style — Toss/Kakao Bank inspired.
+ * Mobile-first, 375px viewport.
+ */
+
+:root {
+  /* Brand */
+  --et-primary: #2563eb;          /* trustworthy blue */
+  --et-primary-strong: #1d4ed8;
+  --et-primary-soft: #dbeafe;
+  --et-primary-tint: #eff6ff;
+
+  /* Accents */
+  --et-success: #10b981;
+  --et-success-soft: #d1fae5;
+  --et-warning: #f59e0b;
+  --et-warning-soft: #fef3c7;
+  --et-danger: #ef4444;
+  --et-danger-soft: #fee2e2;
+  --et-violet: #8b5cf6;
+  --et-violet-soft: #ede9fe;
+
+  /* Neutrals — slate scale */
+  --et-bg: #f5f7fa;
+  --et-surface: #ffffff;
+  --et-surface-alt: #f8fafc;
+  --et-border: #e5e9f0;
+  --et-divider: #f1f3f7;
+
+  --et-text-strong: #0f172a;
+  --et-text: #1e293b;
+  --et-text-soft: #475569;
+  --et-text-mute: #94a3b8;
+  --et-text-faint: #cbd5e1;
+
+  /* Type */
+  --et-font: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo',
+    'Noto Sans KR', system-ui, sans-serif;
+
+  /* Radius */
+  --et-r-sm: 8px;
+  --et-r-md: 12px;
+  --et-r-lg: 16px;
+  --et-r-xl: 20px;
+  --et-r-pill: 999px;
+
+  /* Shadow */
+  --et-shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.04);
+  --et-shadow-md: 0 4px 12px rgba(15, 23, 42, 0.06);
+  --et-shadow-lg: 0 10px 30px rgba(15, 23, 42, 0.08);
+  --et-shadow-blue: 0 8px 24px rgba(37, 99, 235, 0.18);
+}
+
+/* Pretendard — used by Toss/Kakao */
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css');
+
+/* Phone-frame canvas reset */
+.et-phone {
+  width: 375px;
+  height: 812px;
+  background: var(--et-bg);
+  font-family: var(--et-font);
+  color: var(--et-text);
+  font-feature-settings: 'tnum' on;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+  letter-spacing: -0.01em;
+  -webkit-font-smoothing: antialiased;
+}
+
+.et-phone *, .et-phone *::before, .et-phone *::after {
+  box-sizing: border-box;
+}
+
+/* Status bar */
+.et-statusbar {
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 22px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--et-text-strong);
+  flex-shrink: 0;
+  background: transparent;
+}
+.et-statusbar .et-sb-icons {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+/* Generic mobile shell */
+.et-screen {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+}
+.et-scroll {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.et-scroll::-webkit-scrollbar { display: none; }
+
+/* App bar */
+.et-appbar {
+  height: 52px;
+  display: flex;
+  align-items: center;
+  padding: 0 18px;
+  background: var(--et-surface);
+  flex-shrink: 0;
+  gap: 12px;
+}
+.et-appbar-title {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--et-text-strong);
+}
+.et-appbar-icon {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--et-text);
+  cursor: pointer;
+}
+
+/* Tab bar */
+.et-tabbar {
+  height: 72px;
+  background: var(--et-surface);
+  border-top: 1px solid var(--et-divider);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 0 12px 12px;
+  flex-shrink: 0;
+}
+.et-tab {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding-top: 10px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--et-text-mute);
+  cursor: pointer;
+}
+.et-tab.active { color: var(--et-primary); }
+
+/* Buttons */
+.et-btn {
+  width: 100%;
+  height: 56px;
+  border: none;
+  border-radius: var(--et-r-md);
+  font-family: var(--et-font);
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  cursor: pointer;
+  transition: transform .12s, background .15s;
+}
+.et-btn:active { transform: scale(0.98); }
+.et-btn-primary {
+  background: var(--et-primary);
+  color: #fff;
+}
+.et-btn-primary:hover { background: var(--et-primary-strong); }
+.et-btn-soft {
+  background: var(--et-primary-soft);
+  color: var(--et-primary-strong);
+}
+.et-btn-ghost {
+  background: var(--et-surface-alt);
+  color: var(--et-text);
+}
+.et-btn-sm { height: 44px; font-size: 14px; border-radius: 10px; }
+
+/* Cards */
+.et-card {
+  background: var(--et-surface);
+  border-radius: var(--et-r-lg);
+  padding: 18px;
+  box-shadow: var(--et-shadow-sm);
+}
+
+/* Chip */
+.et-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: 26px;
+  padding: 0 10px;
+  border-radius: var(--et-r-pill);
+  font-size: 12px;
+  font-weight: 600;
+  background: var(--et-primary-soft);
+  color: var(--et-primary-strong);
+  white-space: nowrap;
+}
+.et-chip-success { background: var(--et-success-soft); color: #047857; }
+.et-chip-warn { background: var(--et-warning-soft); color: #b45309; }
+.et-chip-violet { background: var(--et-violet-soft); color: #6d28d9; }
+.et-chip-neutral { background: var(--et-surface-alt); color: var(--et-text-soft); border: 1px solid var(--et-border); }
+
+/* Input */
+.et-input {
+  width: 100%;
+  height: 56px;
+  background: var(--et-surface-alt);
+  border: 1.5px solid transparent;
+  border-radius: var(--et-r-md);
+  padding: 0 18px;
+  font-family: var(--et-font);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--et-text-strong);
+  transition: border .15s, background .15s;
+}
+.et-input:focus {
+  outline: none;
+  background: var(--et-surface);
+  border-color: var(--et-primary);
+}
+.et-input-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--et-text-soft);
+  margin-bottom: 8px;
+  display: block;
+}
+
+/* Type helpers */
+.et-h1 { font-size: 26px; font-weight: 800; letter-spacing: -0.025em; color: var(--et-text-strong); line-height: 1.25; }
+.et-h2 { font-size: 22px; font-weight: 800; letter-spacing: -0.02em; color: var(--et-text-strong); line-height: 1.3; }
+.et-h3 { font-size: 18px; font-weight: 700; letter-spacing: -0.015em; color: var(--et-text-strong); line-height: 1.35; }
+.et-h4 { font-size: 16px; font-weight: 700; color: var(--et-text-strong); }
+.et-body { font-size: 14px; font-weight: 500; color: var(--et-text); line-height: 1.5; }
+.et-caption { font-size: 12px; font-weight: 500; color: var(--et-text-mute); }
+.et-num { font-feature-settings: 'tnum' on; font-variant-numeric: tabular-nums; }
+
+/* Hairline */
+.et-hr { height: 1px; background: var(--et-divider); border: none; margin: 0; }
+
+/* Progress */
+.et-progress {
+  height: 6px;
+  background: var(--et-surface-alt);
+  border-radius: 999px;
+  overflow: hidden;
+}
+.et-progress-fill {
+  height: 100%;
+  background: var(--et-primary);
+  border-radius: 999px;
+  transition: width .3s ease;
+}
+
+/* Number ticker base */
+.et-bignum {
+  font-size: 34px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--et-text-strong);
+  font-feature-settings: 'tnum' on;
+  line-height: 1.1;
+}
+
+/* Subtle list row */
+.et-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 0;
+}
+.et-row + .et-row { border-top: 1px solid var(--et-divider); }
+
+/* ── Script font ─────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&display=swap');
+.et-script { font-family: 'Dancing Script', cursive; font-weight: 700; }
+
+/* ── Logo / brand image ──────────────────────────────────── */
+.et-home-indicator { /* class for CSS targeting on mobile */ }
+
+/* ── Mobile: fill full viewport (≤ 600px) ───────────────── */
+@media (max-width: 600px) {
+  .et-phone {
+    width: 100vw !important;
+    height: 100vh !important;
+    height: 100dvh !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    border: none !important;
+  }
+  /* Hide simulated status bar — show real device chrome */
+  .et-statusbar { display: none; }
+  /* Hide home indicator pill */
+  .et-home-indicator { display: none; }
+  /* Tab bar: respect safe area */
+  .et-tabbar {
+    height: auto;
+    min-height: 60px;
+    padding-bottom: max(12px, env(safe-area-inset-bottom));
+  }
+  /* Touch-friendly tap targets */
+  .et-tab { min-height: 44px; }
+  .et-btn { min-height: 52px; }
+}

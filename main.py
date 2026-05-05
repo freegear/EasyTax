@@ -26,7 +26,7 @@ async def lifespan(app: FastAPI):
     log.info("EasyTax 서버 종료")
 
 
-app = FastAPI(title="EasyTax · 고연봉 직장인 절세 진단", lifespan=lifespan)
+app = FastAPI(title="EasyTax · 절세 진단", lifespan=lifespan)
 
 
 @app.get("/login")
@@ -69,7 +69,7 @@ async def logout(request: Request):
 async def root(request: Request):
     if not get_current_user(request):
         return RedirectResponse("/login", status_code=302)
-    return FileResponse(BASE_DIR / "EasyTax.html")
+    return FileResponse(BASE_DIR / "app.html")
 
 
 app.mount("/", StaticFiles(directory=BASE_DIR), name="static")

@@ -37,16 +37,12 @@ _FMT = logging.Formatter(
 
 def setup_logging() -> None:
     LOGS_DIR.mkdir(parents=True, exist_ok=True)
-
     file_handler = DailyFileHandler(LOGS_DIR)
     file_handler.setFormatter(_FMT)
-
     stream_handler = logging.StreamHandler()
     stream_handler.setFormatter(_FMT)
-
     root = logging.getLogger()
     root.setLevel(logging.INFO)
-    # 중복 핸들러 방지
     if not root.handlers:
         root.addHandler(file_handler)
         root.addHandler(stream_handler)
