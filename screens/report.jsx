@@ -2,6 +2,8 @@
 // Hero refund, donut allocation, monthly cashflow, recommendations, action items.
 
 function ScreenReport() {
+  const { go } = React.useContext(window.NavCtx);
+
   const items = [
     { name: 'IRP 추가납입', amount: 7000000, save: 1155000, ratio: 33, color: '#2563eb', emoji: '🏦', tag: '핵심' },
     { name: '연금저축펀드', amount: 6000000, save: 990000, ratio: 28, color: '#8b5cf6', emoji: '📈', tag: '핵심' },
@@ -35,7 +37,7 @@ function ScreenReport() {
   return (
     <Phone>
       <div className="et-screen" style={{ background: 'var(--et-bg)' }}>
-        <AppBar title="포트폴리오 리포트" onBack={() => {}} right={
+        <AppBar title="포트폴리오 리포트" onBack={() => go('home')} right={
           <div className="et-appbar-icon">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
               <path d="M4 12v6a2 2 0 002 2h12a2 2 0 002-2v-6M16 6l-4-4-4 4M12 2v14" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>

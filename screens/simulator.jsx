@@ -146,7 +146,7 @@ function ScreenSimulator() {
 
           {/* CTA */}
           <div style={{ padding: '20px 16px 8px' }}>
-            <button className="et-btn et-btn-primary">이 시뮬레이션으로 포트폴리오 만들기</button>
+            <button className="et-btn et-btn-primary" onClick={() => go('report')}>이 시뮬레이션으로 포트폴리오 만들기</button>
           </div>
         </div>
       </div>

@@ -184,17 +184,10 @@ function TabBar({ active }) {
 
 // Phone wrapper sized exactly to 375x812 with home indicator.
 // On real mobile devices (≤600px) the .et-phone CSS overrides make it full-screen.
-function Phone({ children, statusLight, bg }) {
+function Phone({ children, bg }) {
   return (
     <div className="et-phone" style={{ background: bg || undefined }}>
-      <StatusBar light={statusLight}/>
       {children}
-      <div className="et-home-indicator" style={{
-        position: 'absolute', bottom: 8, left: '50%', transform: 'translateX(-50%)',
-        width: 134, height: 5, borderRadius: 999,
-        background: statusLight ? 'rgba(255,255,255,0.6)' : '#0f172a',
-        opacity: statusLight ? 1 : 0.85, pointerEvents: 'none',
-      }}/>
     </div>
   );
 }
