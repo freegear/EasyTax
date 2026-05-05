@@ -14,8 +14,7 @@ function App() {
       {screen === 'home'       && <ScreenHome />}
       {screen === 'sim'        && <ScreenSimulator />}
       {screen === 'report'     && <ScreenReport />}
-      {/* mypage: fallback to home for now */}
-      {screen === 'mypage'     && <ScreenHome />}
+      {screen === 'mypage'     && <ScreenMyPage />}
     </window.NavCtx.Provider>
   );
 }
