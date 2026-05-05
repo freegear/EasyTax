@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>EasyTax · 고연봉 직장인 절세 진단</title>
+<link rel="stylesheet" href="styles.css" />
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<div id="root"></div>
+
+<script type="text/babel" src="tweaks-panel.jsx"></script>
+<script type="text/babel" src="chrome.jsx"></script>
+<script type="text/babel" src="screen-input.jsx"></script>
+<script type="text/babel" src="screen-analyze.jsx"></script>
+<script type="text/babel" src="screen-result.jsx"></script>
+<script type="text/babel" src="screen-action.jsx"></script>
+
+<script type="text/babel">
+const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+  "accentTheme": "toss-blue"
+}/*EDITMODE-END*/;
+
+const ACCENT_THEMES = {
+  'toss-blue':   { accent: '#3182F6', soft: '#E8F2FE', strong: '#1B64DA', label: 'Toss Blue' },
+  'kakao-yellow':{ accent: '#FAB300', soft: '#FFF6DC', strong: '#C18A00', label: 'Kakao Yellow' },
+  'naver-green': { accent: '#03C75A', soft: '#E1F8EC', strong: '#02A048', label: 'Naver Green' },
+  'coral':       { accent: '#FF6B5B', soft: '#FFEBE7', strong: '#D94532', label: 'Coral' },
+  'violet':      { accent: '#7C5CFF', soft: '#EFEAFF', strong: '#5B3CDB', label: 'Violet' },
+  'midnight':    { accent: '#1B1F28', soft: '#EEF0F3', strong: '#000', label: 'Midnight' },
+};
+
+function applyAccent(theme) {
+  const t = ACCENT_THEMES[theme] || ACCENT_THEMES['toss-blue'];
+  document.documentElement.style.setProperty('--accent', t.accent);
+  document.documentElement.style.setProperty('--accent-soft', t.soft);
+  document.documentElement.style.setProperty('--accent-strong', t.strong);
+}
+
+function App() {
+  const [tweaks, setTweak] = useTweaks(TWEAK_DEFAULTS);
+  const [step, setStep] = React.useState('input'); // input | analyze | result | action
+
+  React.useEffect(() => { applyAccent(tweaks.accentTheme); }, [tweaks.accentTheme]);
+
+  // Scroll to top on step change
+  React.useEffect(() => { window.scrollTo({ top: 0, behavior: 'instant' }); }, [step]);
+
+  return (
+    <>
+      <AppBar />
+      <Stepper current={step} onJump={setStep} />
+
+      {step === 'input' && <ScreenInput onNext={() => setStep('analyze')} />}
+      {step === 'analyze' && <ScreenAnalyze onNext={() => setStep('result')} />}
+      {step === 'result' && <ScreenResult onNext={() => setStep('action')} />}
+      {step === 'action' && <ScreenAction onRestart={() => setStep('input')} />}
+
+      <TweaksPanel title="Tweaks">
+        <TweakSection title="컬러 테마">
+          <TweakSelect
+            label="Accent"
+            value={tweaks.accentTheme}
+            onChange={v => setTweak('accentTheme', v)}
+            options={Object.entries(ACCENT_THEMES).map(([k, t]) => ({ value: k, label: t.label }))}
+          />
+          <div style={{
+            display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 8, marginTop: 8,
+          }}>
+            {Object.entries(ACCENT_THEMES).map(([k, t]) => (
+              <button
+                key={k}
+                onClick={() => setTweak('accentTheme', k)}
+                style={{
+                  height: 36, borderRadius: 8,
+                  background: t.accent,
+                  border: tweaks.accentTheme === k ? '3px solid #111' : '3px solid transparent',
+                  cursor: 'pointer',
+                  outline: 'none',
+                }}
+                title={t.label}
+              />
+            ))}
+          </div>
+        </TweakSection>
+      </TweaksPanel>
+    </>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+
+</body>
+</html>
