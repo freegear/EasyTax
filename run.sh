@@ -4,8 +4,11 @@ set -euo pipefail
 APP_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 VENV_DIR="$APP_DIR/.venv"
 PID_FILE="$APP_DIR/.easytax.pid"
-LOG_FILE="$APP_DIR/easytax.log"
+LOGS_DIR="$APP_DIR/logs"
+LOG_FILE="$LOGS_DIR/easytax_$(date +%Y%m%d).log"
 PORT=9040
+
+mkdir -p "$LOGS_DIR"
 
 # ── 기존 프로세스 정리 ────────────────────────────────────────────────────────
 

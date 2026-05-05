@@ -89,7 +89,7 @@ function ScreenAction({ onRestart }) {
         </div>
 
         {/* Calendar reminder */}
-        <div className="grid-2 mb-24">
+        <div className="mb-24">
           <div className="card">
             <div className="flex items-center gap-12 mb-16">
               <div style={{
@@ -103,21 +103,6 @@ function ScreenAction({ onRestart }) {
               연말정산 마감 1개월 전, 추가 납입 여력이 남아 있다면 알려드릴게요.
             </p>
             <button className="btn btn-ghost btn-sm">알림 받기 설정</button>
-          </div>
-
-          <div className="card">
-            <div className="flex items-center gap-12 mb-16">
-              <div style={{
-                width: 40, height: 40, borderRadius: 12,
-                background: 'var(--success-soft)',
-                display: 'grid', placeItems: 'center', fontSize: 20,
-              }}>📞</div>
-              <h3 className="h-card">세무사 1:1 상담</h3>
-            </div>
-            <p className="body" style={{ fontSize: 14, marginBottom: 16 }}>
-              내년 연말정산까지 1:1 전담 세무사가 도와드려요. (월 9,900원)
-            </p>
-            <button className="btn btn-ghost btn-sm">상담 신청</button>
           </div>
         </div>
 

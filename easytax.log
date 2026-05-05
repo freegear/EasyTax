@@ -38,3 +38,7 @@ INFO:     Waiting for application startup.
 INFO:     Application startup complete.
 INFO:     Uvicorn running on http://0.0.0.0:9040 (Press CTRL+C to quit)
 INFO:     127.0.0.1:54464 - "GET / HTTP/1.1" 302 Found
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [43304]
