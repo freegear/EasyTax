@@ -1,6 +1,19 @@
 // Shared chrome — top app bar + stepper
 
+function getCookie(name) {
+  const match = document.cookie.split(';').find(c => c.trim().startsWith(name + '='));
+  return match ? decodeURIComponent(match.split('=')[1]) : null;
+}
+
+async function handleLogout() {
+  await fetch('/api/auth/logout', { method: 'POST' });
+  window.location.href = '/login';
+}
+
 function AppBar({ step }) {
+  const username = getCookie('username') || '사용자';
+  const initial = username.charAt(0).toUpperCase();
+
   return (
     <div className="appbar">
       <div className="appbar-inner">
@@ -15,8 +28,23 @@ function AppBar({ step }) {
           <a href="#">고객센터</a>
         </nav>
         <div className="appbar-cta">
-          <span style={{fontSize: 14, color: 'var(--text-2)', fontWeight: 600}}>김민준 님</span>
-          <div className="appbar-avatar">민</div>
+          <span style={{fontSize: 14, color: 'var(--text-2)', fontWeight: 600}}>{username} 님</span>
+          <div className="appbar-avatar">{initial}</div>
+          <button
+            onClick={handleLogout}
+            style={{
+              background: 'var(--surface-2)',
+              border: 'none',
+              borderRadius: 8,
+              padding: '6px 14px',
+              fontSize: 13,
+              fontWeight: 600,
+              color: 'var(--text-2)',
+              cursor: 'pointer',
+            }}
+          >
+            로그아웃
+          </button>
         </div>
       </div>
     </div>
