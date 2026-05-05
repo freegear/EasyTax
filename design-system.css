@@ -76,16 +76,7 @@
 
 /* Status bar */
 .et-statusbar {
-  height: 44px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 22px;
-  font-size: 15px;
-  font-weight: 600;
-  color: var(--et-text-strong);
-  flex-shrink: 0;
-  background: transparent;
+  display: none;
 }
 .et-statusbar .et-sb-icons {
   display: flex;
