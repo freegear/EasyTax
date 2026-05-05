@@ -219,5 +219,5 @@ function formatKor(n) {
 }
 
 Object.assign(window, {
-  Icon, StatusBar, AppBar, TabBar, Phone, LogoBrand, formatKRW, formatKor,
+  Icon, AppBar, TabBar, Phone, LogoBrand, formatKRW, formatKor,
 });
