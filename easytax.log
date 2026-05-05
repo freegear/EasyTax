@@ -29,3 +29,12 @@ INFO:     127.0.0.1:54385 - "POST /api/auth/login HTTP/1.1" 200 OK
 INFO:     127.0.0.1:54387 - "GET / HTTP/1.1" 200 OK
 INFO:     127.0.0.1:54389 - "POST /api/auth/logout HTTP/1.1" 200 OK
 INFO:     127.0.0.1:54391 - "GET / HTTP/1.1" 302 Found
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [40802]
+INFO:     Started server process [43304]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:9040 (Press CTRL+C to quit)
+INFO:     127.0.0.1:54464 - "GET / HTTP/1.1" 302 Found

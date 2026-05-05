@@ -1,6 +1,7 @@
 /* EasyTax — Toss/Kakao-style fintech design system */
 
 @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css');
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&display=swap');
 
 :root {
   /* Accent — overridable via Tweaks */
@@ -71,9 +72,14 @@ input, select { font-family: inherit; }
   display: flex; align-items: center; justify-content: space-between;
   padding: 14px 32px;
 }
+.script {
+  font-family: 'Dancing Script', cursive;
+}
+
 .brand {
   display: flex; align-items: center; gap: 8px;
-  font-weight: 800; font-size: 19px; letter-spacing: -0.03em;
+  font-family: 'Dancing Script', cursive;
+  font-weight: 700; font-size: 22px; letter-spacing: 0;
   color: var(--text-1);
 }
 .brand-dot {

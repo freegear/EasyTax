@@ -19,7 +19,7 @@ function AppBar({ step }) {
       <div className="appbar-inner">
         <div className="brand">
           <div className="brand-dot">E</div>
-          <span>EasyTax</span>
+          <span className="script">EasyTax</span>
         </div>
         <nav className="appbar-nav">
           <a href="#">절세 진단</a>
