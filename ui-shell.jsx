@@ -114,33 +114,6 @@ const Icon = {
   ),
 };
 
-function StatusBar({ light }) {
-  const color = light ? '#fff' : '#0f172a';
-  return (
-    <div className="et-statusbar" style={{ color }}>
-      <span>9:41</span>
-      <div className="et-sb-icons">
-        <svg width="18" height="11" viewBox="0 0 18 11" fill="none">
-          <rect x="0" y="6" width="3" height="5" rx="0.6" fill={color}/>
-          <rect x="5" y="4" width="3" height="7" rx="0.6" fill={color}/>
-          <rect x="10" y="2" width="3" height="9" rx="0.6" fill={color}/>
-          <rect x="15" y="0" width="3" height="11" rx="0.6" fill={color}/>
-        </svg>
-        <svg width="16" height="11" viewBox="0 0 16 11" fill="none">
-          <path d="M8 9.5a1.2 1.2 0 100-2.4 1.2 1.2 0 000 2.4z" fill={color}/>
-          <path d="M3 5.6a7.6 7.6 0 0110 0" stroke={color} strokeWidth="1.4" strokeLinecap="round" fill="none"/>
-          <path d="M.7 3a11.4 11.4 0 0114.6 0" stroke={color} strokeWidth="1.4" strokeLinecap="round" fill="none"/>
-        </svg>
-        <svg width="26" height="12" viewBox="0 0 26 12" fill="none">
-          <rect x="0.5" y="0.5" width="22" height="11" rx="3" stroke={color} strokeOpacity="0.5" fill="none"/>
-          <rect x="2" y="2" width="19" height="8" rx="1.5" fill={color}/>
-          <rect x="23.5" y="3.5" width="2" height="5" rx="0.7" fill={color} opacity="0.5"/>
-        </svg>
-      </div>
-    </div>
-  );
-}
-
 function AppBar({ title, onBack, right, transparent }) {
   return (
     <div className="et-appbar" style={{ background: transparent ? 'transparent' : undefined }}>
